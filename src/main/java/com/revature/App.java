@@ -10,15 +10,18 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         System.out.println("Welcome to Bank, Please choose from the following menu.");
-        System.out.println("1.Sign up, 2.Log in,3.Apply for a checking account");
-        List<String> commands = new ArrayList<String> ();
-        commands.add("Sign up");
-        commands.add("Log in");
-        commands.add("Apply for a checking account");
+        System.out.println("1.Sign up, 2.Apply for a checking account");
+        ArrayList<Integer> commands = new ArrayList<Integer>();
+        commands.add(1);
+        commands.add(2);
 		Scanner sc = new Scanner(System.in);
-		String command = sc.nextLine();
+		int command = sc.nextInt();
 		if(commands.contains(command)) {
-			if(command == "1") {
+			if(command == 1) {
+				SignUp start = new SignUp();
+		        start.sign();
+			}
+			if(command == 2) {
 				Apply start = new Apply();
 		        start.apply();
 			}
