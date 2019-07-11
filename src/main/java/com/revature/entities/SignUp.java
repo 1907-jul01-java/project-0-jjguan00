@@ -1,6 +1,8 @@
-package com.revature;
+package com.revature.entities;
 
 import java.util.Scanner;
+
+import com.revature.model.*;
 
 public class SignUp 
 { 
@@ -22,8 +24,7 @@ public class SignUp
 	    System.out.println("Please enter a new username");
 	    String name = sc.nextLine();
 	    String pw = sc.nextLine();
-	    Customer c = new Customer(name,pw);
+	    User c = new User(name,pw);
 	    System.out.println(c.getUsername());
     }
 } 
-

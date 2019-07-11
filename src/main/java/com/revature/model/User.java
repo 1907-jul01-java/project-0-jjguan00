@@ -1,10 +1,10 @@
-package com.revature;
+package com.revature.model;
 
-public class Customer {
+public class User {
 	private String username;
 	private String password;
 	
-    public Customer(String username, String password) {
+    public User(String username, String password) {
     	super();
     	this.setUsername(username);
     	this.setPassword(password);
@@ -27,4 +27,3 @@ public class Customer {
 	}
 
 }
-

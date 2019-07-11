@@ -1,9 +1,8 @@
 package com.revature;
+import com.revature.entities.*;
 import java.util.ArrayList;
-import java.util.List;
 import com.revature.util.*;
 import java.util.Scanner;
-
 /**
  * Hello world!
  *
