@@ -1,5 +1,5 @@
 package com.revature;
-
+import com.revature.model.CheckAccount;
 import java.util.Scanner;
 
 public class Apply {
