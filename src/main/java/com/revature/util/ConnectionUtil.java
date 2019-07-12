@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConnectionUtil {
 	private Connection connection;
-	String url = "jdbc:postgresql://192.168.99.100:5432/project_zero";
-	String username = "project-zero";
-	String password = "password";
+	String url = "jdbc:postgresql://192.168.99.100:5432/postgres";
+	String username = "postgres";
+	String password = "postgres";
 
 	public ConnectionUtil() {
 		try {
@@ -22,6 +22,7 @@ public class ConnectionUtil {
 		System.out.print("here");
 		return connection;
 	}
+	
     public void close() {
         try {
             this.connection.close();

@@ -9,7 +9,6 @@ import java.util.Scanner;
  */
 public class App {
     public static void main(String[] args) {
-    	ConnectionUtil connectionUtil = new ConnectionUtil();
         System.out.println("Welcome to Bank, Please choose from the following menu.");
         System.out.println("1.Sign up, 2.Apply for a checking account");
         ArrayList<Integer> commands = new ArrayList<Integer>();
@@ -19,8 +18,9 @@ public class App {
 		int command = sc.nextInt();
 		if(commands.contains(command)) {
 			if(command == 1) {
-				SignUp start = new SignUp();
-		        start.sign();
+				ConnectionUtil cu = new ConnectionUtil();
+				UserDao start = new UserDao(cu.getConnection());
+		        start.insert();
 			}
 			if(command == 2) {
 				Apply start = new Apply();
