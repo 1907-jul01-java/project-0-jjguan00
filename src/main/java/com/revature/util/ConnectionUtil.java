@@ -19,7 +19,6 @@ public class ConnectionUtil {
 	}
 	
 	public Connection getConnection() {
-		System.out.print("here");
 		return connection;
 	}
 	
