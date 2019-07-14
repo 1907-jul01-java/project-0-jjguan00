@@ -1,5 +1,5 @@
 drop table if exists users;
-drop table if exists checks;
+
 drop table if exists admins;
 
 create table users (
@@ -16,3 +16,5 @@ create table admins(
 	adminname text not null,
 	password text not null
 );
+
+INSERT INTO admins(adminname,password) VALUES ('admin','admin');

@@ -32,6 +32,10 @@ public class App {
 			}
 			if(command == 999) {
 				System.out.println("Welcome to admin mode, please log in.");
+				ConnectionUtil cu = new ConnectionUtil();
+				AdminDao start = new AdminDao(cu.getConnection());
+				start.login();
+				cu.close();
 			}
 			}
 		else {
