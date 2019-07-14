@@ -33,17 +33,12 @@ public class UserDao {
 		String pw = sc.nextLine();
 		System.out.println("Please enter your first name");
 		String firstname = sc.nextLine();
-		System.out.println("Please enter your license");
-		String license = sc.nextLine();
-		Boolean status = false;
 		try {
 			PreparedStatement pStatement = connection.prepareStatement(
-					"insert into users(username, password, firstname,license,status) values(?,?,?,?,?)");
+					"insert into users(username, password, firstname) values(?,?,?)");
 			pStatement.setString(1, name);
 			pStatement.setString(2, pw);
 			pStatement.setString(3, firstname);
-			pStatement.setString(4, license);
-			pStatement.setBoolean(5, status);
 			pStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.getMessage();
