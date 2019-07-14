@@ -64,13 +64,12 @@ public class UserDao {
     		pStatement.setString(2,password);
     		user = pStatement.executeQuery();
 		   if( user.next()){
-		        System.out.print("true");
 	    		UserMenu login = new UserMenu();
-	    		login.setResultset(user);
+	    		String loginUser = user.getString("username");
+	    		login.setResultset(loginUser);
 		   } else {
 		        System.out.print("Wrong UserName and Password");
 		   }
-    		System.out.print((user.getString("username")));
     	}catch(SQLException e) {
     		e.getMessage();
     	}

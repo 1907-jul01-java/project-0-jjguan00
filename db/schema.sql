@@ -1,4 +1,5 @@
 drop table if exists users;
+drop table if exists checks;
 drop table if exists admins;
 
 create table users (
