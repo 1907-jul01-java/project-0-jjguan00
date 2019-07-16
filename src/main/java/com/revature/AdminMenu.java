@@ -3,6 +3,8 @@ package com.revature;
 import java.sql.SQLException;
 import com.revature.App;
 import java.util.Scanner;
+import com.revature.entities.*;
+import com.revature.util.*;
 
 public class AdminMenu {
 	App app;
@@ -24,6 +26,12 @@ public class AdminMenu {
 			System.out.println("6. Log Out");
 			Scanner sc = new Scanner(System.in);
 			int command = sc.nextInt();
+			if(command == 5) {
+				ConnectionUtil cu = new ConnectionUtil();
+				CheckDao checkDao = new CheckDao(cu.getConnection());
+				System.out.println(checkDao.getAllUnapprove());
+				cu.close();
+			}
 			if(command == 6) {
 				user = null;
 				System.out.println("Thank you for using bank, good bye.");

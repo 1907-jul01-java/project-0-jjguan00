@@ -3,7 +3,7 @@ package com.revature.entities;
 import java.util.Scanner;
 import java.sql.*;
 import com.revature.UserMenu;
-//import com.revature.model.*;
+import com.revature.model.User;
 
 public class UserDao {
 	Connection connection;
@@ -46,8 +46,9 @@ public class UserDao {
 			System.out.println("Thank you for signing up for bank. You can log in now.");
 		}
 	}
-	
-    public void getOne() {
+	@SuppressWarnings("null")
+	public void getOne() {
+    	User user = null;
     	Scanner sc = new Scanner(System.in);
     	System.out.println("Please enter your username");
     	String username = sc.nextLine();
@@ -57,11 +58,14 @@ public class UserDao {
     		PreparedStatement pStatement = connection.prepareStatement("select * from users where username = ? and password = ?");
     		pStatement.setString(1,username);
     		pStatement.setString(2,password);
-    		user = pStatement.executeQuery();
-		   if( user.next()){
+    		ResultSet rs = pStatement.executeQuery();
+		   if( rs.next()){
 	    		UserMenu login = new UserMenu();
-	    		String loginUser = user.getString("username");
-	    		login.setResultset(loginUser);
+	    		user.setId(rs.getInt("userid"));
+	    		user.setUsername(rs.getString("username"));
+	    		user.setFirstname(rs.getString("firstname"));
+	    		System.out.println(user.getFirstname());
+	    		login.setResultset(user);
 		   } else {
 		        System.out.print("Wrong UserName and Password");
 		   }
