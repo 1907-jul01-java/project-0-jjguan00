@@ -23,6 +23,9 @@ public class App {
 				UserDao start = new UserDao(cu.getConnection());
 		        start.insert();
 		        cu.close();
+				App restart = new App();
+			    String[] arguments = new String[] {};
+				restart.main(arguments);
 			}
 			if(command.contentEquals("2")) {
 				ConnectionUtil cu = new ConnectionUtil();

@@ -29,7 +29,7 @@ public class UserMenu {
 			System.out.println("3. Make a deposit to current account.");
 			System.out.println("4. Withdrawn money from current account.");
 			System.out.println("5. Transfer money from one account to another");
-			System.out.println("6. Check on current checking account application");
+			System.out.println("6. Check transaction history");
 			System.out.println("7. Log Out");
 			Scanner sc = new Scanner(System.in);
 			String command = sc.nextLine();
@@ -101,6 +101,18 @@ public class UserMenu {
 				check.transfer(uaccount,amount,taccount);
 				System.out.println("You have transfer "+ amount + " into "+ taccount + ".");
 				System.out.print(check.getAccountByUser(user.getId()));
+				cu.close();
+				this.setResultset(user);
+			}
+			if(command.contentEquals("6")) {
+				ConnectionUtil cu = new ConnectionUtil();
+				CheckDao check = new CheckDao(cu.getConnection());
+				System.out.print(check.getAccountByUser(user.getId()));
+				TransactionDao transaction = new TransactionDao(cu.getConnection());
+				System.out.println("");
+				System.out.println("Type in the account transactions history you want to view");
+				int account = sc.nextInt();
+				System.out.print(transaction.getTransactionByAccount(account));
 				cu.close();
 				this.setResultset(user);
 			}

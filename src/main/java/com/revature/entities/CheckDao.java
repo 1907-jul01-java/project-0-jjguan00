@@ -114,10 +114,16 @@ public class CheckDao {
     
     public void deposit(int account, int money) {
     	try {
+    		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    		String content = "Deposited " + money + " into account: "+ account +" at " + timestamp;
         	PreparedStatement pStatement = connection.prepareStatement("Update checks set balance = balance +? where id = ?");
+        	PreparedStatement pStatement2 = connection.prepareStatement("insert into transactions(context,checkid) values (?,?)");
         	pStatement.setInt(1,money);
         	pStatement.setInt(2,account);
+        	pStatement2.setString(1,content);
+        	pStatement2.setInt(2, account);
         	pStatement.executeUpdate();
+        	pStatement2.executeUpdate();
     	}catch(SQLException e) {
     		e.getMessage();
     	}
@@ -126,10 +132,16 @@ public class CheckDao {
     
     public void withdraw(int account, int money) {
     	try {
+    		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    		String content = "Withdrawn " + money + " into account: "+ account +" at " + timestamp;
         	PreparedStatement pStatement = connection.prepareStatement("Update checks set balance = balance -? where id = ?");
+        	PreparedStatement pStatement2 = connection.prepareStatement("insert into transactions(context,checkid) values (?,?)");
         	pStatement.setInt(1,money);
         	pStatement.setInt(2,account);
+        	pStatement2.setString(1,content);
+        	pStatement2.setInt(2, account);
         	pStatement.executeUpdate();
+        	pStatement2.executeUpdate();
     	}catch(SQLException e) {
     		e.getMessage();
     	}
@@ -137,14 +149,25 @@ public class CheckDao {
     }
     public void transfer(int uaccount, int money, int taccount) {
     	try {
+    		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    		String content = "Transferred " + money + " into account: "+ taccount +" at " + timestamp;
+    		String content2 = "Received " + money + " from account: "+ uaccount +" at " + timestamp;
         	PreparedStatement pStatement = connection.prepareStatement("Update checks set balance = balance -? where id = ?");
         	pStatement.setInt(1,money);
         	pStatement.setInt(2,uaccount);
         	PreparedStatement pStatement2 = connection.prepareStatement("Update checks set balance = balance +? where id = ?");
         	pStatement2.setInt(1,money);
         	pStatement2.setInt(2,taccount);
+        	PreparedStatement pStatement3 = connection.prepareStatement("insert into transactions(context,checkid) values (?,?)");
+        	PreparedStatement pStatement4 = connection.prepareStatement("insert into transactions(context,checkid) values (?,?)");
+        	pStatement3.setString(1,content);
+        	pStatement3.setInt(2, uaccount);
+        	pStatement4.setString(1,content2);
+        	pStatement4.setInt(2, taccount);
         	pStatement.executeUpdate();
         	pStatement2.executeUpdate();
+        	pStatement3.executeUpdate();
+        	pStatement4.executeUpdate();
     	}catch(SQLException e) {
     		e.getMessage();
     	}

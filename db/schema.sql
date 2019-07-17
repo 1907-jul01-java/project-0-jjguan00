@@ -1,5 +1,6 @@
 drop table if exists checkusers;
 drop table if exists users;
+drop table if exists transactions;
 drop table if exists checks;
 drop table if exists admins;
 
@@ -14,6 +15,13 @@ create table checks(
 	id int primary key,
 	balance int not null,
 	approved boolean not null
+);
+
+create table transactions(
+	id serial primary key,
+	context text not null,
+	checkid int not null,
+	constraint checkid foreign key(checkid) references Checks(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE checkusers
