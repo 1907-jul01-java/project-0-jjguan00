@@ -43,8 +43,8 @@ This is a banking apps that allow users to transfer, withdrawn, and deposit thei
 - [x] Employees should be able to approve/deny open applications for accounts.
 - [x] Bank admins should be able to view and edit all accounts. This includes:
     - [x] Approving/denying accounts
-    - [xx] Withdrawing, depositing, transferring from all accounts
-    - [] Canceling accounts
+    - [x] Withdrawing, depositing, transferring from all accounts
+    - [x] Canceling accounts
 - [x] All information should be persisted using text files and serialization.
 - [x] Create an SQL script that will create a user in an SQL database and a table schema for storing your bank users and account information.
 - [x] Have your bank application connect to your SQL database using JDBC and store all information that way.
