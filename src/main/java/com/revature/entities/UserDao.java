@@ -7,22 +7,11 @@ import com.revature.model.User;
 
 public class UserDao {
 	Connection connection;
-	ResultSet user = null;
-
+	User user;
 	public UserDao(Connection connection) {
 		this.connection = connection;
 	}
 
-//    public static void main(String[] args) {
-//    // Declare the object and initialize with 
-//    // predefined standard input object 
-//	    @SuppressWarnings("resource")
-//		Scanner sc = new Scanner(System.in);
-//	    String name = sc.nextLine();
-//	    String pw = sc.nextLine();
-//	    Customer c = new Customer(name,pw);
-//	    System.out.println(c.getUsername());
-//    }
 	public void insert() {
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
@@ -34,8 +23,8 @@ public class UserDao {
 		System.out.println("Please enter your first name");
 		String firstname = sc.nextLine();
 		try {
-			PreparedStatement pStatement = connection.prepareStatement(
-					"insert into users(username, password, firstname) values(?,?,?)");
+			PreparedStatement pStatement = connection
+					.prepareStatement("insert into users(username, password, firstname) values(?,?,?)");
 			pStatement.setString(1, name);
 			pStatement.setString(2, pw);
 			pStatement.setString(3, firstname);
@@ -46,9 +35,8 @@ public class UserDao {
 			System.out.println("Thank you for signing up for bank. You can log in now.");
 		}
 	}
-	@SuppressWarnings("null")
+
 	public void getOne() {
-    	User user = null;
     	Scanner sc = new Scanner(System.in);
     	System.out.println("Please enter your username");
     	String username = sc.nextLine();
@@ -60,11 +48,11 @@ public class UserDao {
     		pStatement.setString(2,password);
     		ResultSet rs = pStatement.executeQuery();
 		   if( rs.next()){
+			   String uname = rs.getString("username");
+			   String fname = rs.getString("firstname");
+			   int id = rs.getInt("id");
+			   User user = new User(uname,fname,id);
 	    		UserMenu login = new UserMenu();
-	    		user.setId(rs.getInt("userid"));
-	    		user.setUsername(rs.getString("username"));
-	    		user.setFirstname(rs.getString("firstname"));
-	    		System.out.println(user.getFirstname());
 	    		login.setResultset(user);
 		   } else {
 		        System.out.print("Wrong UserName and Password");

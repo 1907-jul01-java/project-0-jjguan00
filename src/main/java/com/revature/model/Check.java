@@ -22,5 +22,15 @@ public class Check {
 	public void setApprove(boolean approve) {
 		this.approve = approve;
 	}
+	public Check(int account, int balance, boolean approve) {
+		super();
+		this.account = account;
+		this.balance = balance;
+		this.approve = approve;
+	}
+	@Override
+	public String toString() {
+		return "Check [account=" + account + ", balance=" + balance + ", approve=" + approve + "]";
+	}
 	
 }

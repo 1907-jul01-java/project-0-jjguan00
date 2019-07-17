@@ -30,7 +30,12 @@ public class AdminMenu {
 				ConnectionUtil cu = new ConnectionUtil();
 				CheckDao checkDao = new CheckDao(cu.getConnection());
 				System.out.println(checkDao.getAllUnapprove());
+				System.out.println("Please enter the checking account you want to approve");
+				int approveAcc = sc.nextInt();
+				checkDao.approveCheck(approveAcc);
+				System.out.println("Account:" + approveAcc + "has beeen approved.");
 				cu.close();
+				this.menu(user);
 			}
 			if(command == 6) {
 				user = null;

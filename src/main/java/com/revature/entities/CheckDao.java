@@ -39,23 +39,89 @@ public class CheckDao {
 	}
 	
     public List<Check> getAllUnapprove() {
+        List<Check> checks = new ArrayList<Check>();
         Check check;
-        List<Check> checks = new ArrayList<>();
         try {
-        	PreparedStatement statement = connection.prepareStatement("select * from checks");
+        	PreparedStatement statement = connection.prepareStatement("select * from checks where approved = false");
             ResultSet resultSet = statement.executeQuery();
-            int size = resultSet.getRow();
-            System.out.print(size);
             while (resultSet.next()) {
-                check = new Check();
-                check.setAccount(resultSet.getInt("account"));
-                check.setBalance(resultSet.getInt("balance"));
-                check.setApprove(resultSet.getBoolean("approved"));
+            	int account = resultSet.getInt("id");
+            	int balance = resultSet.getInt("balance");
+            	boolean approved = resultSet.getBoolean("approved");
+                check = new Check(account, balance, approved);
                 checks.add(check);
             }
         } catch (SQLException e) {
 
         }
         return checks;
-    } 
+    }
+    
+    public void approveCheck(int account) {
+    	try {
+        	PreparedStatement pStatement = connection.prepareStatement("Update checks set approved = true where id = ?");
+        	pStatement.setInt(1,account);
+        	pStatement.executeUpdate();
+    	}catch(SQLException e) {
+    		e.getMessage();
+    	}
+    }
+    
+    public List<Check> getAccountByUser(int userid) {
+        List<Check> checks = new ArrayList<Check>();
+        Check check;
+        try {
+        	PreparedStatement statement = connection.prepareStatement("select * from checks join checkusers on checks.id = checkusers.checkAccount join users on checkusers.userid = users.id where checks.approved = true and users.id = 1");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+            	int account = resultSet.getInt("id");
+            	int balance = resultSet.getInt("balance");
+            	boolean approved = true;
+                check = new Check(account, balance, approved);
+                checks.add(check);
+            }
+        } catch (SQLException e) {
+
+        }
+        return checks;
+    }
+    
+    public void deposit(int account, int money) {
+    	try {
+        	PreparedStatement pStatement = connection.prepareStatement("Update checks set balance = balance +? where id = ?");
+        	pStatement.setInt(1,money);
+        	pStatement.setInt(2,account);
+        	pStatement.executeUpdate();
+    	}catch(SQLException e) {
+    		e.getMessage();
+    	}
+    	
+    }
+    
+    public void withdraw(int account, int money) {
+    	try {
+        	PreparedStatement pStatement = connection.prepareStatement("Update checks set balance = balance -? where id = ?");
+        	pStatement.setInt(1,money);
+        	pStatement.setInt(2,account);
+        	pStatement.executeUpdate();
+    	}catch(SQLException e) {
+    		e.getMessage();
+    	}
+    	
+    }
+    public void transfer(int uaccount, int money, int taccount) {
+    	try {
+        	PreparedStatement pStatement = connection.prepareStatement("Update checks set balance = balance -? where id = ?");
+        	pStatement.setInt(1,money);
+        	pStatement.setInt(2,uaccount);
+        	PreparedStatement pStatement2 = connection.prepareStatement("Update checks set balance = balance +? where id = ?");
+        	pStatement2.setInt(1,money);
+        	pStatement2.setInt(2,taccount);
+        	pStatement.executeUpdate();
+        	pStatement2.executeUpdate();
+    	}catch(SQLException e) {
+    		e.getMessage();
+    	}
+    	
+    }
 }
