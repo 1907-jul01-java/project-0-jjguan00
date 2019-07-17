@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class App {
     public static void main(String[] args) {
+        System.out.println("");
         System.out.println("Welcome to Bank, Please choose from the following menu.");
         System.out.println("1.Sign up, 2.Log in");
         ArrayList<String> commands = new ArrayList<String>();
@@ -32,6 +33,9 @@ public class App {
 				UserDao start = new UserDao(cu.getConnection());
 				start.getOne();
 				cu.close();
+				App restart = new App();
+			    String[] arguments = new String[] {};
+				restart.main(arguments);
 			}
 			if(command.contentEquals("999")) {
 				System.out.println("Welcome to admin mode, please log in.");
@@ -39,6 +43,9 @@ public class App {
 				AdminDao start = new AdminDao(cu.getConnection());
 				start.login();
 				cu.close();
+				App restart = new App();
+			    String[] arguments = new String[] {};
+				restart.main(arguments);
 			}
 			}
 		else {

@@ -30,7 +30,7 @@ public class Check {
 	}
 	@Override
 	public String toString() {
-		return "Check [account=" + account + ", balance=" + balance + ", approve=" + approve + "]";
+		return "["+"account=" + account + ", balance=" + balance + ", approve=" + approve + "]";
 	}
 	
 }

@@ -82,6 +82,25 @@ public class CheckDao {
         return checks;
     }
     
+    public List<Check> getAll() {
+        List<Check> checks = new ArrayList<Check>();
+        Check check;
+        try {
+        	PreparedStatement statement = connection.prepareStatement("select * from checks  where approved = true");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+            	int account = resultSet.getInt("id");
+            	int balance = resultSet.getInt("balance");
+            	boolean approved = resultSet.getBoolean("approved");
+                check = new Check(account, balance, approved);
+                checks.add(check);
+            }
+        } catch (SQLException e) {
+
+        }
+        return checks;
+    }
+    
     public void approveCheck(int account) {
     	try {
         	PreparedStatement pStatement = connection.prepareStatement("Update checks set approved = true where id = ?");
