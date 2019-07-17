@@ -37,7 +37,32 @@ public class CheckDao {
 		} finally {
 		}
 	}
-	
+	public void applyjoint(int userid, int ideposit, int juserid) {
+		SecureRandom random = new SecureRandom();
+		int num = 10000 + random.nextInt(90000);
+		try {
+			PreparedStatement pStatement = connection.prepareStatement(
+					"insert into checks values(?,?,?)");
+			PreparedStatement pStatement2 = connection.prepareStatement(
+					"insert into checkusers(checkaccount,userid) values(?,?)");
+			PreparedStatement pStatement3 = connection.prepareStatement(
+					"insert into checkusers(checkaccount,userid) values(?,?)");
+			pStatement.setInt(1, num);
+			pStatement.setInt(2, ideposit);
+			pStatement.setBoolean(3, false);
+			pStatement2.setInt(1, num);
+			pStatement2.setInt(2, userid);
+			pStatement3.setInt(1, num);
+			pStatement3.setInt(2, juserid);
+			pStatement.executeUpdate();
+			pStatement2.executeUpdate();
+			pStatement3.executeUpdate();
+			System.out.println("Thank you for applying for joint checking account, our agents will approve and give your the account ready.");
+		} catch (SQLException e) {
+			e.getMessage();
+		} finally {
+		}
+	}
     public List<Check> getAllUnapprove() {
         List<Check> checks = new ArrayList<Check>();
         Check check;
@@ -71,7 +96,8 @@ public class CheckDao {
         List<Check> checks = new ArrayList<Check>();
         Check check;
         try {
-        	PreparedStatement statement = connection.prepareStatement("select * from checks join checkusers on checks.id = checkusers.checkAccount join users on checkusers.userid = users.id where checks.approved = true and users.id = 1");
+        	PreparedStatement statement = connection.prepareStatement("select * from checks join checkusers on checks.id = checkusers.checkAccount join users on checkusers.userid = users.id where checks.approved = true and users.id = ?");
+        	statement.setInt(1, userid);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
             	int account = resultSet.getInt("id");

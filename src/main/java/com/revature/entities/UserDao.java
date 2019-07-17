@@ -61,4 +61,20 @@ public class UserDao {
     		e.getMessage();
     	}
     }
+	public int getUseridByUsername(String username) {
+    	try {
+    		PreparedStatement pStatement = connection.prepareStatement("select * from users where username = ?");
+    		pStatement.setString(1,username);
+    		ResultSet rs = pStatement.executeQuery();
+		   if( rs.next()){
+			   int tuserid = rs.getInt("id");
+			   return tuserid;
+		   } else {
+		        System.out.print("Wrong UserName and Password");
+		   }
+    	}catch(SQLException e) {
+    		e.getMessage();
+    	}
+    	return 0;
+	}
 }

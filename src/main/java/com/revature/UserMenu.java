@@ -40,6 +40,23 @@ public class UserMenu {
 				cu.close();
 				this.setResultset(user);
 			}
+			if(command.contentEquals("2")) {
+				ConnectionUtil cu = new ConnectionUtil();
+				CheckDao check = new CheckDao(cu.getConnection());
+				System.out.println("Please enter the username of the person you want to create account with");
+				UserDao juser = new UserDao(cu.getConnection());
+				String jusername = sc.nextLine();
+				int jusrid = juser.getUseridByUsername(jusername);
+				if(jusrid == 0) {
+					System.out.println("Please enter a valid user");
+					this.menu(user);
+				}
+				System.out.println("Please enter your initial deposit");
+				int damount = sc.nextInt();
+				check.applyjoint(user.getId(),damount,jusrid);
+				cu.close();
+				this.setResultset(user);
+			}
 			if(command.contentEquals("3")) {
 				ConnectionUtil cu = new ConnectionUtil();
 				CheckDao check = new CheckDao(cu.getConnection());
