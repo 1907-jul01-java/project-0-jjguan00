@@ -31,7 +31,7 @@ This is a banking apps that allow users to transfer, withdrawn, and deposit thei
 - [x] Login - Authentication & Authorization
 - [x] Persisting State - Save/Load to file or DB
 
-## Example: The Banking App
+## The Banking App
 - [x] Build the application using Java 8.
 - [x] All interaction with the user should be done through the console using the `Scanner` class.
 - [x] Customers of the bank should be able to register with a username and password, and apply to open an account.
