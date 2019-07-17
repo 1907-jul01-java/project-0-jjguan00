@@ -31,10 +31,10 @@ checkAccount INT NOT NULL,
 PRIMARY KEY(userID, checkAccount),
 
 constraint fk_checkuser__user
-foreign key(userID) references Users(id),
+foreign key(userID) references Users(id) ON DELETE CASCADE,
 
 constraint fk_checkuser__checkID
-foreign key(checkAccount) references Checks(id)
+foreign key(checkAccount) references Checks(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 

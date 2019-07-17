@@ -147,6 +147,17 @@ public class CheckDao {
     	}
     	
     }
+    public void destroy(int account) {
+    	try {
+        	PreparedStatement pStatement = connection.prepareStatement("Delete From checks where id = ?");
+        	pStatement.setInt(1, account);
+        	pStatement.executeUpdate();
+
+    	}catch(SQLException e) {
+    		e.getMessage();
+    	}
+    	
+    }
     public void transfer(int uaccount, int money, int taccount) {
     	try {
     		Timestamp timestamp = new Timestamp(System.currentTimeMillis());

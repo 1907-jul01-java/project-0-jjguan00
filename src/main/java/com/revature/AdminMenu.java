@@ -21,11 +21,21 @@ public class AdminMenu {
 			System.out.println("1. Make a deposit to a account.");
 			System.out.println("2. Withdrawn money from a account.");
 			System.out.println("3. Transfer money from one account to another");
-			System.out.println("4. View checking account application");
+			System.out.println("4. Delete checking account application");
 			System.out.println("5. Approve checking account application");
 			System.out.println("6. Log Out");
 			Scanner sc = new Scanner(System.in);
 			int command = sc.nextInt();
+			if(command == 4) {
+				ConnectionUtil cu = new ConnectionUtil();
+				CheckDao checkDao = new CheckDao(cu.getConnection());
+				System.out.println("Please enter the checking account you want to destroy");
+				int destroyAcc = sc.nextInt();
+				checkDao.destroy(destroyAcc);
+				System.out.println("Account:" + destroyAcc + " has beeen destroyed.");
+				cu.close();
+				this.menu(user);
+			}
 			if(command == 5) {
 				ConnectionUtil cu = new ConnectionUtil();
 				CheckDao checkDao = new CheckDao(cu.getConnection());
