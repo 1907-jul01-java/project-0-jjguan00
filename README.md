@@ -1,12 +1,7 @@
 # Banking App using Maven and JDBC
+
 ## Jackie
 This is a banking apps that allow users to transfer, withdrawn, and deposit their money. Admin is allow to destroy accounts in addition to transfer,withdraw and deposit from any accounts.
-
-# User Stories
-- [x] List
-- [] Each
-- [] User
-- [] Story
 
 ### Tools & APIs
 - [x] Java SE 8
@@ -31,7 +26,7 @@ This is a banking apps that allow users to transfer, withdrawn, and deposit thei
 - [x] Login - Authentication & Authorization
 - [x] Persisting State - Save/Load to file or DB
 
-## The Banking App
+### The Banking App
 - [x] Build the application using Java 8.
 - [x] All interaction with the user should be done through the console using the `Scanner` class.
 - [x] Customers of the bank should be able to register with a username and password, and apply to open an account.
